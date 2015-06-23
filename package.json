@@ -1,0 +1,35 @@
+{
+  "name": "simple-circuit-breaker",
+  "version": "0.1.0",
+  "description": "A simple circuit breaker pattern for node.",
+  "main": "index.js",
+  "engines": {
+    "node": ">=0.10.0"
+  },
+  "dependencies": {
+    "mocha": "^2.0.1",
+    "should": "^4.3.0"
+  },
+  "scripts": {
+    "test": "coffee -co lib src; ./node_modules/mocha/bin/mocha",
+    "prepublish": "coffee -co lib src"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/crueber/SimpleCircuitBreaker.git"
+  },
+  "keywords": [
+    "serializer"
+  ],
+  "authors": [
+    "Christopher Rueber"
+  ],
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/crueber/SimpleCircuitBreaker/issues"
+  },
+  "homepage": "https://github.com/crueber/SimpleCircuitBreaker",
+  "devDependencies": {
+    "coffee-script": "^1.9.1"
+  }
+}
