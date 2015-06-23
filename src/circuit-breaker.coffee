@@ -7,7 +7,7 @@ CircuitBreakerTimeout = require './circuit-breaker-timeout'
 # How this class is used:
 #
 # var options = { threshold: 6 } 
-# var switch  = function (callback() { callback(); }
+# var switch  = function (callback) { callback(); }
 # var after   = function (error, args...) {}
 # new CircuitBreaker(options).execute(switch, after)
 ###
@@ -59,7 +59,6 @@ class CircuitBreaker
   _decay_time: => @decay_timeout * Math.pow(@decay_rate, @attempts)
   _decay: () =>
     return @after_switch_callback('open', @) if @is_open()
-
     @decay_timer = setTimeout @execute, @_decay_time()
 
 

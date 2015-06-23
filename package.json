@@ -30,6 +30,8 @@
   },
   "homepage": "https://github.com/crueber/SimpleCircuitBreaker",
   "devDependencies": {
-    "coffee-script": "^1.9.1"
+    "coffee-script": "^1.9.1",
+    "should-sinon": "0.0.3",
+    "sinon": "^1.15.3"
   }
 }
