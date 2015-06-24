@@ -21,7 +21,7 @@ class CircuitBreaker
 
   execute: =>
     if @exec_args and arguments[0]
-      throw new Error("A circuit breaker cannot be reused with new functions.")
+      return throw new Error("A circuit breaker cannot be reused with new functions.")
     unless @exec_args
       @exec_args = Array.prototype.slice.call(arguments) 
       @after_switch_callback = if typeof arguments[arguments.length - 1] is 'function' then @exec_args.pop() else @debug

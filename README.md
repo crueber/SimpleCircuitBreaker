@@ -21,9 +21,13 @@ A simple example:
 
 ```javascript
 var options = { threshold: 6 } 
-var switch  = function (callback) { callback(); }
-var after   = function (error, args...) {}
-new CircuitBreaker(options).execute(switch, after);
+var switch_fn = function (callback) { 
+  callback(null, true)
+} 
+var after_fn_no_error = function (error, arg) {
+  carryOn()
+}
+new CircuitBreaker({}).execute(switch_fn, after_fn_no_error)
 ```
 
 For further details, I would recommend glancing at the tests!
