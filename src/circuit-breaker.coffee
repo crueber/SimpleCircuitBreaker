@@ -4,7 +4,7 @@
 CircuitBreakerTimeout = require './circuit-breaker-timeout'
 
 
-class CircuitBreaker
+class SingleUseCircuitBreaker
   threshold: 4
   decay_timeout: 1000
   switch_timeout: 5000
@@ -56,4 +56,4 @@ class CircuitBreaker
 
 
 
-module.exports = CircuitBreaker
+module.exports = SingleUseCircuitBreaker
