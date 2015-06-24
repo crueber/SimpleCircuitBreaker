@@ -27,7 +27,7 @@ var switch_fn = function (callback) {
 var after_fn_no_error = function (error, arg) {
   carryOn()
 }
-new CircuitBreaker({}).execute(switch_fn, after_fn_no_error)
+new CircuitBreaker(options).execute(switch_fn, after_fn_no_error)
 ```
 
 For further details, I would recommend glancing at the tests!
