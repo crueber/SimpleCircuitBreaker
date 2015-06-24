@@ -2,7 +2,7 @@ Simple Circuit Breaker
 ======================
 [![Node.js Version][node-version-image]][node-version-url]
 
-[![NPM](https://nodei.co/npm/data-serializer.png?downloads=true)](https://nodei.co/npm/simple-circuit-breaker/)
+[![NPM](https://nodei.co/npm/simple-circuit-breaker.png?downloads=true)](https://nodei.co/npm/simple-circuit-breaker/)
 
 Written in spite of all of the other circuit breaker libraries because the other patterns I've found. They appear not to be interested in the design pattern, but rather the architectural one. Which is great and dandy, but doesn't handle the need of basic circuit-oriented retry logic.
 
@@ -45,6 +45,6 @@ The above copyright notice and this permission notice shall be included in all c
 
 THE SOFTWARE IS PROVIDED 'AS IS', WITHOUT WARRANTY OF ANY KIND, EXPRESS OR IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY, FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM, OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE SOFTWARE.
 
-[npm-image]: https://img.shields.io/npm/v/data-serializer.svg?style=flat
+[npm-image]: https://img.shields.io/npm/v/simple-circuit-breaker.svg?style=flat
 [node-version-image]: https://img.shields.io/badge/node.js-%3E%3D_10.0-brightgreen.svg?style=flat
 [node-version-url]: http://nodejs.org/download/
