@@ -50,7 +50,7 @@ describe('CircuitBreaker', function(){
     new CircuitBreaker({decay_timeout: 3, switch_timeout: 10, debug: logger}).execute(switch_fn, after_fn_no_error)
   })
 
-  it('should timeout send an error after all possible attempts have been used', function (done) {
+  it('should timeout and send an error after all possible attempts have been used', function (done) {
     var logger = sinon.spy()
     var attempts = 0
     var switch_fn = function (callback) { 
@@ -63,5 +63,23 @@ describe('CircuitBreaker', function(){
       done()
     }
     new CircuitBreaker({decay_timeout: 3, decay_rate: 1.2, switch_timeout: 3, debug: logger}).execute(switch_fn, after_fn_no_error)
+  })
+
+  it('should throw an error if you try to reuse the class', function (done) {
+    var switch_fn = function (callback) { 
+      callback(null, true)
+    } 
+    var after_fn_no_error = function (error, arg) {
+      should(error).be.exactly(null)
+      arg.should.equal(true)
+      try {
+        cb.execute(switch_fn, function () {})
+      } catch (e) {
+        e.message.should.startWith('A circuit breaker cannot')
+        done()
+      }
+    }
+    var cb = new CircuitBreaker({})
+    cb.execute(switch_fn, after_fn_no_error)    
   })
 })

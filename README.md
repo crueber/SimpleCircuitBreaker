@@ -21,7 +21,7 @@ A simple example:
 
 ```javascript
 var options = { threshold: 6 } 
-var switch  = function (callback() { callback(); }
+var switch  = function (callback) { callback(); }
 var after   = function (error, args...) {}
 new CircuitBreaker(options).execute(switch, after);
 ```
