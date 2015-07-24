@@ -24,7 +24,7 @@ class SingleUseCircuitBreaker
       return throw new Error("A circuit breaker cannot be reused with new functions.")
     unless @exec_args
       @exec_args = Array.prototype.slice.call(arguments) 
-      @after_switch_callback = if typeof arguments[arguments.length - 1] is 'function' then @exec_args.pop() else @debug
+      @after_switch_callback = if typeof arguments[arguments.length - 1] is 'function' then @exec_args.pop() else @default_after
       @switch_function = @exec_args.shift() if typeof arguments[0] is 'function'
       return throw new Error('Must specify the switch function at a minimum.') unless @switch_function
 
@@ -34,13 +34,15 @@ class SingleUseCircuitBreaker
 
   is_closed: => @status is 'closed'
   is_open: => @status is 'open'
+  default_after: =>
+    @debug 'Circuit Breaker: Successful', arguments
   cancel: =>
     clearTimeout @decay_timer if @decay_timer
     clearTimeout @switch_timer if @switch_timer
   _handle_timeout: =>
     @_handle_switch new CircuitBreakerTimeout()
   _handle_switch: (error) =>
-    clearTimeout @switch_timer if @switch_timer
+    @cancel()
 
     if error
       @debug(error)
