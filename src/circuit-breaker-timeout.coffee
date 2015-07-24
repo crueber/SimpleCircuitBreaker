@@ -2,7 +2,7 @@
 # MIT Licensed
 
 class CircuitBreakerTimeout extends Error
-  name: 'MyError'
+  name: 'CircuitBreakerTimeout'
   message: 'Circuit Breaker Timed Out'
   constructor: (@message) ->
 
