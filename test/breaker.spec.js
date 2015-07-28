@@ -82,4 +82,31 @@ describe('CircuitBreaker', function(){
     var cb = new CircuitBreaker({})
     cb.execute(switch_fn, after_fn_no_error)    
   })
+
+
+  it('an error gets thrown but still moves forward', function (done) {
+    var logger = sinon.spy()
+    var attempts = 0
+    var result = true
+    var err_result = null
+    var switch_fn = function (callback) { 
+      attempts += 1
+      callback(null, result)
+    } 
+    var after_fn_no_error = function (error, arg) {
+      should(error).be.exactly(err_result)
+      should(attempts).be.exactly(1)
+      arg.should.equal(result)
+      logger.should.have.callCount(0)
+      done()
+    }
+    var error_check_fn = function (err) {
+      return err_result
+    }
+    new CircuitBreaker({decay_timeout: 3, debug: logger, error_checker: error_check_fn}).execute(switch_fn, after_fn_no_error)
+  })
+
+
+
+
 })

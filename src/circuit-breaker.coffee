@@ -9,6 +9,7 @@ class SingleUseCircuitBreaker
   decay_timeout: 1000
   switch_timeout: 5000
   status: 'closed' # or open
+  error_checker: null
   decay_rate: 2
 
   debug: (message) -> console.log "Circuit Breaker: #{message}"
@@ -43,6 +44,8 @@ class SingleUseCircuitBreaker
     @_handle_switch new CircuitBreakerTimeout()
   _handle_switch: (error) =>
     @cancel()
+
+    error = @error_checker(error) if @error_checker
 
     if error
       @debug(error)

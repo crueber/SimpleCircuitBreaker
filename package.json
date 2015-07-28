@@ -1,6 +1,6 @@
 {
   "name": "singleuse-circuit-breaker",
-  "version": "0.3.0",
+  "version": "0.3.1",
   "description": "Circuit-oriented retry logic that backs off as failures mount.",
   "main": "index.js",
   "engines": {
