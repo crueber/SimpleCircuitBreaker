@@ -106,7 +106,18 @@ describe('CircuitBreaker', function(){
     new CircuitBreaker({decay_timeout: 3, debug: logger, error_checker: error_check_fn}).execute(switch_fn, after_fn_no_error)
   })
 
+  it('is capable of calling the after_fn callback multiple times', function (done) {
+    var switch_fn = function (callback) {
+      setTimeout(callback, 10, true)
+    }
+    var after_fn = sinon.spy();
 
+    new CircuitBreaker({decay_timeout: 3, switch_timeout: 3, debug: function() {}}).execute(switch_fn, after_fn)
 
+    setTimeout(function() {
+      after_fn.should.have.callCount(2)
+      done()
+    }, 1000)
+  })
 
 })
