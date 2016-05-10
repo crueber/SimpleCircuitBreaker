@@ -8,6 +8,7 @@ class SingleUseCircuitBreaker
   threshold: 4
   decay_timeout: 1000
   switch_timeout: 5000
+  status: 'closed' # or open
   error_checker: null
   decay_rate: 2
 
@@ -34,6 +35,8 @@ class SingleUseCircuitBreaker
     @switch_timer = setTimeout @_handle_timeout, @switch_timeout
     @switch_function(@_handle_switch)
 
+  is_closed: => @status is 'closed'
+  is_open: => @status is 'open'
   default_after: =>
     @debug 'Circuit Breaker: Successful', arguments
 
@@ -51,13 +54,15 @@ class SingleUseCircuitBreaker
 
     if error
       @debug(error)
-      return @after_switch_callback('open', @) if @attempts >= @threshold
+      @status = 'open' if @attempts >= @threshold
       @attempts += 1
-      @decay_timer = setTimeout @_execute, @_decay_time()
+      @_decay()
     else
       @after_switch_callback.apply(@, arguments)
 
   _decay_time: => @decay_timeout * Math.pow(@decay_rate, @attempts)
-
+  _decay: () =>
+    return @after_switch_callback('open', @) if @is_open()
+    @decay_timer = setTimeout @_execute, @_decay_time()
 
 module.exports = SingleUseCircuitBreaker
